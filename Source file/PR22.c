@@ -6,11 +6,29 @@
 
 //	include
 //==========================================================================
+#if defined(__XC8)
+  #include <xc.h>
+ #pragma config CONFIG = 0x3F32
+//FOSC = EXTRC     // Oscillator Selection bits (RC oscillator)
+//WDTE = ON        // Watchdog Timer Enable bit (WDT enabled)
+//PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
+//BOREN = ON       // Brown-out Reset Enable bit (BOR enabled)
+//LVP = ON         // Low-Voltage (Single-Supply) In-Circuit Serial Programming Enable bit (RB3/PGM pin has PGM function; low-voltage programming enabled)
+//CPD = OFF        // Data EEPROM Memory Code Protection bit (Data EEPROM code protection off)
+//WRT = OFF        // Flash Program Memory Write Enable bits (Write protection off; all program memory may be written to by EECON control)
+//CP = OFF         // Flash Program Memory Code Protection bit (Code protection off)
+
+#else
+//#include <htc.h>                  //include the PIC microchip header file
 #include <pic.h>
 
 //	configuration
 //==========================================================================
-__CONFIG ( 0x3F32 );				//configuration for the  microcontroller
+__CONFIG (0x3F32);//configuration for the  microcontroller
+
+#endif
+
+//==========================================================================================
 
 //	define
 //==========================================================================
@@ -38,7 +56,7 @@ void mode1(void);
 void mode2(void);
 void mode3(void);
 
-void delay(unsigned long data);			
+void delay(unsigned long data);
 
 void send_config(unsigned char data);
 void send_char(unsigned char data);
@@ -82,12 +100,12 @@ void main()
 	SDO = 1;							//release SPI data out
 	CSB = 1;							//disable slave
 
-	//setup ADC	
+	//setup ADC
 	ADCON1 = 0b00000110;				//set ADx pin digital I/O
 
 	//configure lcd
 	send_config(0b00000001);			//clear display at lcd
-	send_config(0b00000010);			//lcd return to home 
+	send_config(0b00000010);			//lcd return to home
 	send_config(0b00000110);			//entry mode-cursor increase 1
 	send_config(0b00001100);			//display on, cursor off and cursor blink off
 	send_config(0b00111000);			//function set
@@ -97,10 +115,10 @@ void main()
 	CCP2CON = 0b00001100;				//PWM Mode
 	PR2 = 0xFF;							//PWM Period Setting (4.88KHz)
 	T2CON = 0b00000101;					//Timer2 On, prescale 4
-	contrast = 50;						//lower is darker (character) (0 - 254)
-	brightness = 0;					//higher is brighter (back_light) (0 - 254)
+	CONTRAST = 50;						//lower is darker (character) (0 - 254)
+	BRIGHTNESS = 0;					//higher is brighter (back_light) (0 - 254)
 
-	//display startup message	
+	//display startup message
 	lcd_clr();							//clear lcd
 	lcd_goto(0);						//set the lcd cursor to location 0
 	send_string("Cytron Tech.");		//display "Cytron Tech."
@@ -118,19 +136,19 @@ void main()
 		send_string("Sensor:");			//display "Sensor:"
 		lcd_goto(20);					//set the lcd cursor to location 20
 		send_string("OK");				//display "OK"
-	
-		while(button3)					//while button3 (ok) is pressed
+
+		while(BUTTON3)					//while button3 (ok) is pressed
 		{
-			if(!button1)				//if button1 (decrease) is pressed
+			if(!BUTTON1)				//if button1 (decrease) is pressed
 			{
 				//prevent the program to decrease the mode to lower than 1
-				if(mode > 1)			
+				if(mode > 1)
 					mode--;
 			}
-			else if(!button2)			//else if button2 (increase) is pressed
+			else if(!BUTTON2)			//else if button2 (increase) is pressed
 			{
 				//prevent the program to increase the mode to higher than 3
-				if(mode < 3)			
+				if(mode < 3)
 					mode++;
 			}
 
@@ -153,7 +171,7 @@ void main()
 		}
 
 		delay(10000);					//delay for certain period to debounce
-		while(!button3);				//hold program until button3 (ok) is released
+		while(!BUTTON3);				//hold program until button3 (ok) is released
 		delay(10000);					//delay for certain period to debounce
 
 		switch(mode)
@@ -183,13 +201,13 @@ void mode1(void)
 		lcd_goto(20);				//set lcd cursor to location 20
 		send_string("OK");			//display "OK"
 
-		if(!button1)				//if button1 (decrease) is pressed
+		if(!BUTTON1)				//if button1 (decrease) is pressed
 		{
 			//prevent the program to decrease the submode to lower than 1
 			if(submode > 1)
 				submode--;
 		}
-		else if(!button2)			//else if button2 (increase) is pressed
+		else if(!BUTTON2)			//else if button2 (increase) is pressed
 		{
 			//prevent the program to increase the submode to higher than 4
 			if(submode < 4)
@@ -213,10 +231,10 @@ void mode1(void)
 						break;
 		}
 
-		if(!button3)				//if button3 (ok) is pressed
+		if(!BUTTON3)				//if button3 (ok) is pressed
 		{
 			delay(10000);			//delay for certain period to debounce
-			while(!button3);		//hold program until button3 is released
+			while(!BUTTON3);		//hold program until button3 is released
 			delay(10000);			//delay for certain period to debounce
 
 			lcd_clr();				//clear lcd
@@ -231,19 +249,19 @@ void mode1(void)
 							send_string("Exit");				//display "Exit"
 
 							//update bridge offset (compass)
-							i2c_master_data[0] = 'O';		 	
+							i2c_master_data[0] = 'O';
 							i2c_start(0x42, 1, write);			//send '0' to slave (compass)
 							delay(10000);						//delay for certain period
 
-							while(button3)						//loop while button3 is released
+							while(BUTTON3)						//loop while button3 is released
 							{
-								//send read command				
-								i2c_master_data[0] = 'A';		
+								//send read command
+								i2c_master_data[0] = 'A';
 								i2c_start(0x42, 1, write);		//send 'A' to slave (compass)
 								delay(10000);					//delay for certain period
-						
+
 								i2c_start(0x42, 2, read);		//read data from slave (compass)
-						
+
 								lcd_goto(9);					//set lcd cursor to location 20
 
 								//combine 2 bytes to form an integer
@@ -259,7 +277,7 @@ void mode1(void)
 							}
 
 							delay(10000);						//delay for certain period to debounce
-							while(!button3);					//wait until button3 is released
+							while(!BUTTON3);					//wait until button3 is released
 							delay(10000);						//delay for certain period to debounce
 
 							lcd_clr();							//clear lcd
@@ -273,19 +291,19 @@ void mode1(void)
 							lcd_goto(20);						//set the lcd cursor to location 20
 							send_string("Exit");				//display "Exit"
 
-							//send 'calibration' command						
-							i2c_master_data[0] = 'C';		
+							//send 'calibration' command
+							i2c_master_data[0] = 'C';
 							i2c_start(0x42, 1, write);			//send 'C' to slave (compass)
-						
-							while(button3);						//wait until button3 is pressed
+
+							while(BUTTON3);						//wait until button3 is pressed
 							delay(10000);
-							while(!button3);					//wait until button3 is released
+							while(!BUTTON3);					//wait until button3 is released
 							delay(10000);
 
 							//send 'exit calibration' command
-							i2c_master_data[0] = 'E';			
+							i2c_master_data[0] = 'E';
 							i2c_start(0x42, 1, write);			//send 'E' to slave (compass)
-						
+
 							lcd_clr();							//clear lcd
 							lcd_goto(0);						//set the lcd cursor to location 0
 							send_string("Done");				//display "Done"
@@ -295,23 +313,23 @@ void mode1(void)
 				case 3	:	//reset compass offset (discard calibration)
 
 							//send 'write eeprom' command
-							i2c_master_data[0] = 'w';			
+							i2c_master_data[0] = 'w';
 							i2c_master_data[1] = 0x01;			//x_offset high byte
 							i2c_master_data[2] = 0;				//clear
 							i2c_start(0x42, 3, write);			//send 'w', 0x01 and 0 to slave (compass)
 							delay(10000);
-						
+
 							i2c_master_data[1] = 0x02;			//x_offset low byte
 							i2c_start(0x42, 3, write);			//send 'w', 0x02 and 0 to slave (compass)
 							delay(10000);						//delay for certain period
-						
+
 							i2c_master_data[1] = 0x03;			//y_offset high byte
 							i2c_start(0x42, 3, write);			//send 'w', 0x03 and 0 to slave (compass)
 							delay(10000);						//delay for certain period
-						
+
 							i2c_master_data[1] = 0x04;			//y_offset low byte
 							i2c_start(0x42, 3, write);			//send 'w', 0x04 and 0 to slave (compass)
-						
+
 							lcd_clr();							//clear lcd
 							lcd_goto(0);						//set the lcd cursor to location 0
 							send_string("Done");				//display "Done"
@@ -323,10 +341,10 @@ void mode1(void)
 							return;
 
 				default	:	break;
-			}			
+			}
 		}
 		delay(30000);				//delay for certain period so user can increase/decrease
-									//the submode continuously by pressing the button										
+									//the submode continuously by pressing the button
 	}
 }
 
@@ -352,7 +370,7 @@ void mode2(void)
 
 	//Configure sensing module
 	//after each data sent, the address register of sensing module will be incremented
-	//by 1 automatically, so user does not required to specify the address of following 
+	//by 1 automatically, so user does not required to specify the address of following
 	//data to be sent
 	i2c_master_data[0] = 0x07;				//starting address of data to be sent = 0x07
 	i2c_master_data[1] = 0b10000000;		//address = 0x07 (CAP SET-UP)
@@ -375,7 +393,7 @@ void mode2(void)
 	//to it, for taking air capacitance as zero scale in program
 	do
 	{
-		i2c_start(0x90, 6, write);		
+		i2c_start(0x90, 6, write);
 
 		do
 			i2c_start(0x90, 1, read);
@@ -406,7 +424,7 @@ void mode2(void)
 	lcd_goto(20);							//set the lcd cursor to location 20
 	send_string("Tem.:");					//display "Tem.:"
 
-	while(button3)							//hold program until button3 is pushed
+	while(BUTTON3)							//hold program until button3 is pushed
 	{
 		//read data from sensing module
 
@@ -415,12 +433,12 @@ void mode2(void)
 		while(i2c_master_rcvb[0] != 0);		//continue to poll until data is ready
 
 		i2c_start(0x90, 7, read);			//read raw values (tem. & cap.) from module
-	
+
 		/*
 		data read from sensing module
 		(address)
 			0x00			0x01			0x02			0x03			0x04			0x05			0x06
-	
+
 		(data)
 		/	status	\/	capacitive	\/	capacitive	\/	capacitive	\/	v/t			\/	v/t			\/	v/t			\
 		\			/\	high byte	/\	middle byte	/\	low byte	/\	high byte	/\	middle byte	/\	low byte	/
@@ -433,7 +451,7 @@ void mode2(void)
 		capacitance_raw <<= 8;
 		capacitance_raw += i2c_master_rcvb[3];
 		capacitance = capacitance_raw / 2048;
-	
+
 		//conversion to degree (celcius)
 		temperature_raw = i2c_master_rcvb[4];
 		temperature_raw <<= 8;
@@ -466,7 +484,7 @@ void mode2(void)
 	}
 
 	delay(10000);										//delay for certain period to debounce
-	while(!button3);									//hold program until button3 is released
+	while(!BUTTON3);									//hold program until button3 is released
 	delay(10000);										//delay for certain period to debounce
 }
 
@@ -485,7 +503,7 @@ void mode3(void)
 	lcd_goto(20);										//set lcd cursor to location 20
 	send_string("Tem.:");								//display "Tem.:"
 
-	while(button3)										//hold program until button3 is pushed
+	while(BUTTON3)										//hold program until button3 is pushed
 	{
 		do
 			spi_baro(0x07, 0, read);
@@ -538,7 +556,7 @@ void mode3(void)
 	}
 
 	delay(10000);										//delay for certain period to debounce
-	while(!button3);									//hold program until button3 is released
+	while(!BUTTON3);									//hold program until button3 is released
 	spi_baro(0x03, 0, write);							//set barometric module to standby mode
 	delay(10000);										//delay for certain period
 }
@@ -548,43 +566,43 @@ void delay(unsigned long data)			//delay function, the delay time
 	for( ;data>0;data--);
 }
 
-void send_config(unsigned char data)	//send lcd configuration 
+void send_config(unsigned char data)	//send lcd configuration
 {
-	rs=0;								//set lcd to configuration mode
-	lcd_data=data;						//lcd data port = data
-	e=1;								//pulse e to confirm the data
+	RS=0;								//set lcd to configuration mode
+	LCD_DATA=data;						//lcd data port = data
+	E=1;								//pulse e to confirm the data
 	delay(50);
-	e=0;
+	E=0;
 	delay(50);
 }
 
 void send_char(unsigned char data)		//send lcd character
 {
-	rs=1;								//set lcd to display mode
-	lcd_data=data;						//lcd data port = data
-	e=1;								//pulse e to confirm the data
+	RS=1;								//set lcd to display mode
+	LCD_DATA=data;						//lcd data port = data
+	E=1;								//pulse e to confirm the data
 	delay(10);
-	e=0;
+	E=0;
 	delay(10);
 }
 
 void lcd_goto(unsigned char data)		//set the location of the lcd cursor
-{										//if the given value is (0-15) the 
+{										//if the given value is (0-15) the
  	if(data<16)							//cursor will be at the upper line
-	{									//if the given value is (20-35) the 
+	{									//if the given value is (20-35) the
 	 	send_config(0x80+data);			//cursor will be at the lower line
 	}									//location of the lcd cursor(2X16):
 	else								// -----------------------------------------------------
 	{									// | |00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15| |
 	 	data=data-20;					// | |20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35| |
-		send_config(0xc0+data);			// -----------------------------------------------------	
+		send_config(0xc0+data);			// -----------------------------------------------------
 	}
 }
 
 void lcd_clr(void)						//clear the lcd
 {
  	send_config(0x01);
-	delay(600);	
+	delay(600);
 }
 
 void send_string(const char *s)			//send a string to display in the lcd
@@ -633,7 +651,7 @@ void i2c_start(unsigned char address, unsigned char size, unsigned operation)
 		PEN = 1;							//after all data is transmitted, send STOP
 		while(!SSPIF);						//hold program until progress is completed (SSPIF will be set)
 		SSPIF = 0;							//clear flagbit caused by STOP
-	}	
+	}
 }
 
 void spi_baro(unsigned char register_address, unsigned char data, unsigned operation)
@@ -643,13 +661,13 @@ void spi_baro(unsigned char register_address, unsigned char data, unsigned opera
 
 	if(operation == write)					//write operation
 		spi_start(data);
-	else									//read operation	
+	else									//read operation
 	{
 		//for read mode, send bulk data
 		spi_baro_rcvb[0] = spi_start(0);
 
 		if((register_address == 0x20) || (register_address == 0x21))	//if 16 bit wide (register 0x20 and 0x21)
-			//for reading 16 bit register,spi_baro_rcvb[0] = MSbyte, spi_baro_rcvb[1] = LSbyte	
+			//for reading 16 bit register,spi_baro_rcvb[0] = MSbyte, spi_baro_rcvb[1] = LSbyte
 			spi_baro_rcvb[1] = spi_start(0);
 	}
 	CSB = 1;								//disable slave
@@ -668,7 +686,7 @@ unsigned char spi_start(unsigned char data)
 		rcvb += SDI;						//shift in data bit near rising edge
 		data <<= 1;
 		if(i < 7)
-			rcvb <<= 1;	 
+			rcvb <<= 1;
 		SCL = 1;							//hold clock high
 		delay(100);							//delay for certain period
 	}
