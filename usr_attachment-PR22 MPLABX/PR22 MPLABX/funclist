@@ -1,0 +1,20 @@
+___awdiv: CODE, 3276 0 118
+_mode1: CODE, 1231 0 817
+_spi_baro: CODE, 2809 0 81
+_delay: CODE, 2615 0 48
+_i2c_start: CODE, 4 0 142
+_mode2: CODE, 470 0 761
+___awmod: CODE, 3064 0 102
+_main: CODE, 146 0 324
+_mode3: CODE, 3394 0 702
+_lcd_clr: CODE, 2454 0 20
+___lwdiv: CODE, 2731 0 78
+_lcd_goto: CODE, 2474 0 29
+_send_string: CODE, 2577 0 38
+___lldiv: CODE, 3166 0 110
+_send_config: CODE, 2540 0 37
+___lwmod: CODE, 2663 0 68
+_send_char: CODE, 2503 0 37
+___llmod: CODE, 2972 0 92
+_spi_start: CODE, 2890 0 82
+Total: 3686

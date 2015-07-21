@@ -1,0 +1,460 @@
+HI-TECH Software C Compiler 
+
+Linker command line:
+
+--edf=C:\Program Files\HI-TECH Software\dat\en_msgs.txt -cs -h+PR 22.sym -z \
+  -Q16F876A -ol.obj -MPR 22.map -E1 -ACONST=00h-0FFhx32 -ACODE=00h-07FFhx4 \
+  -ASTRCODE=00h-01FFFh -AENTRY=00h-0FFhx32 -ASTRING=00h-0FFhx32 \
+  -ABANK0=020h-06Fh -ABANK1=0A0h-0EFh -ABANK2=0110h-016Fh \
+  -ABANK3=0190h-01EFh -ARAM=020h-06Fh,0A0h-0EFh,0110h-016Fh,0190h-01EFh \
+  -AABS1=020h-07Fh,0A0h-0EFh,0110h-016Fh,0190h-01EFh -ACOMMON=070h-07Fh \
+  -ASFR0=00h-01Fh -ASFR1=080h-09Fh -ASFR2=0100h-010Fh -ASFR3=0180h-018Fh \
+  -preset_vec=00h,intentry,init,end_init -ppowerup=CODE -pfunctab=CODE \
+  -ACONFIG=02007h-02007h -pconfig=CONFIG -DCONFIG=2 -AIDLOC=02000h-02003h \
+  -pidloc=IDLOC -DIDLOC=2 -AEEDATA=00h-0FFh/02100h -peeprom_data=EEDATA \
+  -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 -DENTRY=2 -k \
+  startup.obj PR 22.obj 
+
+Object code version is 3.10
+
+Machine type is 16F876A
+
+
+
+                Name                               Link     Load   Length Selector   Space Scale
+startup.obj     end_init                              0        0        3        0       0
+PR 22.obj       config                             2007     2007        1     400E       0
+                text396                             9F1      9F1       30     13E2       0
+                text395                             C94      C94       96     1928       0
+                text394                             A65      A65       50     14CA       0
+                text393                             A21      A21       44     1442       0
+                text392                               B        B       7B       16       0
+                text391                             B60      B60       5C     16C0       0
+                text390                             C26      C26       6E     184C       0
+                text389                             BBC      BBC       6A     1778       0
+                text388                             981      981       25     1302       0
+                text387                             9A6      9A6       25     134C       0
+                text386                             B06      B06       5A     160C       0
+                text385                             950      950       14     12A0       0
+                text384                             964      964       1D     12C8       0
+                text383                             9CB      9CB       26     1396       0
+                text382                             AB5      AB5       51     156A       0
+                text381                             4C7      4C7      339      98E       0
+                text380                             1CA      1CA      2FD      394       0
+                text379                             D2A      D2A      2D6     1A54       0
+                maintext                             86       86      144      10C       0
+                cstackBANK0                          20       20       17       20       1
+                cstackCOMMON                         70       70        E       70       1
+                clrtext                               3        3        8        0       0
+                bssBANK0                             37       37       11       20       1
+                cinit                               943      943        D     1286       0
+                strings                             800      800       E4     1000       0
+
+TOTAL           Name                               Link     Load   Length     Space
+        CLASS   CONST          
+
+        CLASS   CODE           
+                end_init                              0        0        3         0
+                text396                             9F1      9F1       30         0
+                text395                             C94      C94       96         0
+                text394                             A65      A65       50         0
+                text393                             A21      A21       44         0
+                text392                               B        B       7B         0
+                text391                             B60      B60       5C         0
+                text390                             C26      C26       6E         0
+                text389                             BBC      BBC       6A         0
+                text388                             981      981       25         0
+                text387                             9A6      9A6       25         0
+                text386                             B06      B06       5A         0
+                text385                             950      950       14         0
+                text384                             964      964       1D         0
+                text383                             9CB      9CB       26         0
+                text382                             AB5      AB5       51         0
+                text381                             4C7      4C7      339         0
+                text380                             1CA      1CA      2FD         0
+                text379                             D2A      D2A      2D6         0
+                maintext                             86       86      144         0
+                clrtext                               3        3        8         0
+                cinit                               943      943        D         0
+
+        CLASS   STRCODE        
+
+        CLASS   ENTRY          
+
+        CLASS   STRING         
+                strings                             800      800       E4         0
+
+        CLASS   BANK0          
+                cstackBANK0                          20       20       17         1
+                bssBANK0                             37       37       11         1
+
+        CLASS   BANK1          
+
+        CLASS   BANK2          
+
+        CLASS   BANK3          
+
+        CLASS   RAM            
+
+        CLASS   ABS1           
+                abs_s1                               7E       7E        2         1
+
+        CLASS   COMMON         
+                cstackCOMMON                         70       70        E         1
+
+        CLASS   SFR0           
+
+        CLASS   SFR1           
+
+        CLASS   SFR2           
+
+        CLASS   SFR3           
+
+        CLASS   CONFIG         
+                config                             2007     2007        1         0
+
+        CLASS   IDLOC          
+
+        CLASS   EEDATA         
+
+
+
+SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
+
+                reset_vec                      000000  00000B  00000B         0       0  CODE        2
+                text392                        00000B  00007B  000086        16       0  CODE        2
+                cstackBANK0                    000020  000028  000048        20       1  BANK0       1
+                cstackCOMMON                   000070  00000E  00007E        70       1  COMMON      1
+                maintext                       000086  000144  0001CA       10C       0  CODE        2
+                text380                        0001CA  0002FD  0004C7       394       0  CODE        2
+                text381                        0004C7  000339  000800       98E       0  CODE        2
+                strings                        000800  0000E4  0008E4      1000       0  STRING      2
+                cinit                          000943  00000D  000950      1286       0  CODE        2
+                text385                        000950  000014  000964      12A0       0  CODE        2
+                text384                        000964  00001D  000981      12C8       0  CODE        2
+                text388                        000981  000025  0009A6      1302       0  CODE        2
+                text387                        0009A6  000025  0009CB      134C       0  CODE        2
+                text383                        0009CB  000026  0009F1      1396       0  CODE        2
+                text396                        0009F1  000030  000A21      13E2       0  CODE        2
+                text393                        000A21  000044  000A65      1442       0  CODE        2
+                text394                        000A65  000050  000AB5      14CA       0  CODE        2
+                text382                        000AB5  000051  000B06      156A       0  CODE        2
+                text386                        000B06  00005A  000B60      160C       0  CODE        2
+                text391                        000B60  00005C  000BBC      16C0       0  CODE        2
+                text389                        000BBC  00006A  000C26      1778       0  CODE        2
+                text390                        000C26  00006E  000C94      184C       0  CODE        2
+                text395                        000C94  000096  000D2A      1928       0  CODE        2
+                text379                        000D2A  0002D6  001000      1A54       0  CODE        2
+                config                         002007  000001  002008      400E       0  CONFIG      2
+
+
+UNUSED ADDRESS RANGES
+
+        Name                Unused          Largest block    Delta
+        BANK0            0048-006F             28           1
+        BANK1            00A0-00EF             50           1
+        BANK2            0110-016F             60           1
+        BANK3            0190-01EF             60           1
+        CODE             08E4-0942             5F           2
+                         1000-1FFF            800
+        CONST            08E4-0942             1C           2
+                         1000-1FFF            100
+        EEDATA           2100-21FF            100           2
+        ENTRY            08E4-0942             1C           2
+                         1000-1FFF            100
+        IDLOC            2000-2003              4           2
+        RAM              0048-006F             28           1
+                         00A0-00EF             50
+                         0110-016F             60
+                         0190-01EF             60
+        SFR0             0000-001F             20           1
+        SFR1             0080-009F             20           1
+        SFR2             0100-010F             10           1
+        SFR3             0180-018F             10           1
+        STRCODE          08E4-0942             5F           2
+                         1000-1FFF           1000
+        STRING           08E4-0942             1C           2
+                         1000-1FFF            100
+
+                                  Symbol Table
+
+??___awdiv                cstackCOMMON 007B
+??___awmod                cstackCOMMON 0074
+??___lldiv                cstackCOMMON 0078
+??___llmod                cstackCOMMON 0078
+??___lwdiv                cstackCOMMON 007A
+??___lwmod                cstackCOMMON 0074
+??_delay                  cstackCOMMON 0074
+??_i2c_start              cstackCOMMON 0073
+??_lcd_clr                cstackCOMMON 0079
+??_lcd_goto               cstackCOMMON 0079
+??_main                   cstackBANK0  0036
+??_mode1                  cstackBANK0  0020
+??_mode2                  cstackBANK0  0024
+??_mode3                  cstackBANK0  0024
+??_send_char              cstackCOMMON 0078
+??_send_config            cstackCOMMON 0078
+??_send_string            cstackCOMMON 0079
+??_spi_baro               cstackCOMMON 007C
+??_spi_start              cstackCOMMON 0078
+?___awdiv                 cstackCOMMON 0077
+?___awmod                 cstackCOMMON 0070
+?___lldiv                 cstackCOMMON 0070
+?___llmod                 cstackCOMMON 0070
+?___lwdiv                 cstackCOMMON 0076
+?___lwmod                 cstackCOMMON 0070
+?_delay                   cstackCOMMON 0070
+?_i2c_start               cstackCOMMON 0070
+?_lcd_clr                 cstackCOMMON 0070
+?_lcd_goto                cstackCOMMON 0070
+?_main                    cstackCOMMON 0070
+?_mode1                   cstackCOMMON 0070
+?_mode2                   cstackCOMMON 0070
+?_mode3                   cstackCOMMON 0070
+?_send_char               cstackCOMMON 0070
+?_send_config             cstackCOMMON 0070
+?_send_string             cstackCOMMON 0070
+?_spi_baro                cstackBANK0  0020
+?_spi_start               cstackCOMMON 0070
+_ACKDT                    (abs)        048D
+_ACKEN                    (abs)        048C
+_ADCON1                   (abs)        009F
+_CCP1CON                  (abs)        0017
+_CCP2CON                  (abs)        001D
+_CCPR1L                   (abs)        0015
+_CCPR2L                   (abs)        001B
+_PEN                      (abs)        048A
+_PORTB                    (abs)        0006
+_PR2                      (abs)        0092
+_RA0                      (abs)        0028
+_RA1                      (abs)        0029
+_RA2                      (abs)        002A
+_RA3                      (abs)        002B
+_RA5                      (abs)        002D
+_RC0                      (abs)        0038
+_RC5                      (abs)        003D
+_RC6                      (abs)        003E
+_RC7                      (abs)        003F
+_RCEN                     (abs)        048B
+_SEN                      (abs)        0488
+_SSPADD                   (abs)        0093
+_SSPBUF                   (abs)        0013
+_SSPCON                   (abs)        0014
+_SSPCON2                  (abs)        0091
+_SSPIF                    (abs)        0063
+_SSPSTAT                  (abs)        0094
+_T2CON                    (abs)        0012
+_TRISA                    (abs)        0085
+_TRISB                    (abs)        0086
+_TRISC                    (abs)        0087
+__Habs1                   abs1         0000
+__Hbank0                  bank0        0000
+__Hbank1                  bank1        0000
+__Hbank2                  bank2        0000
+__Hbank3                  bank3        0000
+__HbssBANK0               bssBANK0     0000
+__Hcinit                  cinit        0000
+__Hclrtext                clrtext      0000
+__Hcode                   code         0000
+__Hcommon                 common       0000
+__Hconfig                 config       2008
+__HcstackBANK0            cstackBANK0  0000
+__HcstackCOMMON           cstackCOMMON 0000
+__Heeprom_data            eeprom_data  0000
+__Hend_init               end_init     0003
+__Hfunctab                functab      0000
+__Hidloc                  idloc        0000
+__Hinit                   init         0000
+__Hintentry               intentry     0000
+__Hmaintext               maintext     0000
+__Hpowerup                powerup      0000
+__Hram                    ram          0000
+__Hreset_vec              reset_vec    0000
+__Hsfr0                   sfr0         0000
+__Hsfr1                   sfr1         0000
+__Hsfr2                   sfr2         0000
+__Hsfr3                   sfr3         0000
+__Hstrings                strings      0000
+__Htext                   text         0000
+__Labs1                   abs1         0000
+__Lbank0                  bank0        0000
+__Lbank1                  bank1        0000
+__Lbank2                  bank2        0000
+__Lbank3                  bank3        0000
+__LbssBANK0               bssBANK0     0000
+__Lcinit                  cinit        0000
+__Lclrtext                clrtext      0000
+__Lcode                   code         0000
+__Lcommon                 common       0000
+__Lconfig                 config       2007
+__LcstackBANK0            cstackBANK0  0000
+__LcstackCOMMON           cstackCOMMON 0000
+__Leeprom_data            eeprom_data  0000
+__Lend_init               end_init     0000
+__Lfunctab                functab      0000
+__Lidloc                  idloc        0000
+__Linit                   init         0000
+__Lintentry               intentry     0000
+__Lmaintext               maintext     0000
+__Lpowerup                powerup      0000
+__Lram                    ram          0000
+__Lreset_vec              reset_vec    0000
+__Lsfr0                   sfr0         0000
+__Lsfr1                   sfr1         0000
+__Lsfr2                   sfr2         0000
+__Lsfr3                   sfr3         0000
+__Lstrings                strings      0000
+__Ltext                   text         0000
+__S0                      (abs)        2008
+__S1                      (abs)        007E
+__S2                      (abs)        0000
+___awdiv                  text392      000B
+___awdiv@counter          cstackBANK0  0020
+___awdiv@dividend         cstackCOMMON 0079
+___awdiv@divisor          cstackCOMMON 0077
+___awdiv@quotient         cstackBANK0  0022
+___awdiv@sign             cstackBANK0  0021
+___awmod                  text389      0BBC
+___awmod@counter          cstackCOMMON 0075
+___awmod@dividend         cstackCOMMON 0072
+___awmod@divisor          cstackCOMMON 0070
+___awmod@sign             cstackCOMMON 0076
+___lldiv                  text390      0C26
+___lldiv@counter          cstackCOMMON 007D
+___lldiv@dividend         cstackCOMMON 0074
+___lldiv@divisor          cstackCOMMON 0070
+___lldiv@quotient         cstackCOMMON 0079
+___llmod                  text391      0B60
+___llmod@counter          cstackCOMMON 0079
+___llmod@dividend         cstackCOMMON 0074
+___llmod@divisor          cstackCOMMON 0070
+___lwdiv                  text394      0A65
+___lwdiv@counter          cstackCOMMON 007D
+___lwdiv@dividend         cstackCOMMON 0078
+___lwdiv@divisor          cstackCOMMON 0076
+___lwdiv@quotient         cstackCOMMON 007B
+___lwmod                  text393      0A21
+___lwmod@counter          cstackCOMMON 0075
+___lwmod@dividend         cstackCOMMON 0072
+___lwmod@divisor          cstackCOMMON 0070
+__end_of___awdiv          text392      0086
+__end_of___awmod          text389      0C26
+__end_of___lldiv          text390      0C94
+__end_of___llmod          text391      0BBC
+__end_of___lwdiv          text394      0AB5
+__end_of___lwmod          text393      0A65
+__end_of_delay            text396      0A21
+__end_of_i2c_start        text395      0D2A
+__end_of_lcd_clr          text385      0964
+__end_of_lcd_goto         text384      0981
+__end_of_main             maintext     01CA
+__end_of_mode1            text381      0800
+__end_of_mode2            text380      04C7
+__end_of_mode3            text379      1000
+__end_of_send_char        text387      09CB
+__end_of_send_config      text388      09A6
+__end_of_send_string      text383      09F1
+__end_of_spi_baro         text382      0B06
+__end_of_spi_start        text386      0B60
+__pbssBANK0               bssBANK0     0037
+__pcstackBANK0            cstackBANK0  0020
+__pcstackCOMMON           cstackCOMMON 0070
+__pmaintext               maintext     0086
+__pstrings                strings      0800
+__ptext378                text378      0000
+__ptext379                text379      0D2A
+__ptext380                text380      01CA
+__ptext381                text381      04C7
+__ptext382                text382      0AB5
+__ptext383                text383      09CB
+__ptext384                text384      0964
+__ptext385                text385      0950
+__ptext386                text386      0B06
+__ptext387                text387      09A6
+__ptext388                text388      0981
+__ptext389                text389      0BBC
+__ptext390                text390      0C26
+__ptext391                text391      0B60
+__ptext392                text392      000B
+__ptext393                text393      0A21
+__ptext394                text394      0A65
+__ptext395                text395      0C94
+__ptext396                text396      09F1
+__ptext397                text397      0000
+__size_of___awdiv         (abs)        0000
+__size_of___awmod         (abs)        0000
+__size_of___lldiv         (abs)        0000
+__size_of___llmod         (abs)        0000
+__size_of___lwdiv         (abs)        0000
+__size_of___lwmod         (abs)        0000
+__size_of_delay           (abs)        0000
+__size_of_i2c_start       (abs)        0000
+__size_of_lcd_clr         (abs)        0000
+__size_of_lcd_goto        (abs)        0000
+__size_of_main            (abs)        0000
+__size_of_mode1           (abs)        0000
+__size_of_mode2           (abs)        0000
+__size_of_mode3           (abs)        0000
+__size_of_send_char       (abs)        0000
+__size_of_send_config     (abs)        0000
+__size_of_send_string     (abs)        0000
+__size_of_spi_baro        (abs)        0000
+__size_of_spi_start       (abs)        0000
+_delay                    text396      09F1
+_exit                     init         0000
+_i2c_master_data          bssBANK0     0037
+_i2c_master_rcvb          bssBANK0     003E
+_i2c_start                text395      0C94
+_lcd_clr                  text385      0950
+_lcd_goto                 text384      0964
+_main                     maintext     0086
+_mode                     bssBANK0     0045
+_mode1                    text381      04C7
+_mode2                    text380      01CA
+_mode3                    text379      0D2A
+_send_char                text387      09A6
+_send_config              text388      0981
+_send_string              text383      09CB
+_spi_baro                 text382      0AB5
+_spi_baro_rcvb            bssBANK0     0046
+_spi_start                text386      0B06
+btemp                     (abs)        007E
+clear_ram                 clrtext      0003
+delay@data                cstackCOMMON 0070
+end_of_initialization     cinit        094C
+i2c_start@address         cstackCOMMON 0075
+i2c_start@i               cstackCOMMON 0076
+i2c_start@operation       cstackCOMMON 0071
+i2c_start@size            cstackCOMMON 0070
+intlevel0                 functab      0000
+intlevel1                 functab      0000
+intlevel2                 functab      0000
+intlevel3                 functab      0000
+intlevel4                 functab      0000
+intlevel5                 functab      0000
+lcd_goto@data             cstackCOMMON 007A
+mode1@result              cstackBANK0  0022
+mode1@submode             cstackBANK0  0024
+mode2@capacitance         cstackBANK0  0033
+mode2@capacitance_raw     cstackBANK0  0029
+mode2@i                   cstackBANK0  0032
+mode2@temperature         cstackBANK0  0031
+mode2@temperature_raw     cstackBANK0  002D
+mode3@pressure            cstackBANK0  002E
+mode3@pressure_raw        cstackBANK0  002A
+mode3@temp                cstackBANK0  0032
+mode3@temperature         cstackBANK0  0034
+mode3@temperature_raw     cstackBANK0  0028
+reset_vec                 reset_vec    0000
+send_char@data            cstackCOMMON 0078
+send_config@data          cstackCOMMON 0078
+send_string@s             cstackCOMMON 007A
+spi_baro@data             cstackBANK0  0020
+spi_baro@operation        cstackBANK0  0021
+spi_baro@register_address cstackBANK0  0023
+spi_start@data            cstackCOMMON 0079
+spi_start@i               cstackCOMMON 007B
+spi_start@rcvb            cstackCOMMON 007A
+start                     init         0000
+start_initialization      cinit        0943
+wtemp0                    (abs)        007E
